@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'login_screen.dart';
+
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    });
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

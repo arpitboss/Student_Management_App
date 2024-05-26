@@ -10,6 +10,7 @@ import '../bloc/bottom_nav/bottom_nav_bloc.dart';
 import '../bloc/bottom_nav/bottom_nav_state.dart';
 import '../bloc/student/student_bloc.dart';
 import '../services/firestore_service.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, selectedIndex) {
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: Row(
                 children: [
                   const Text(
@@ -50,6 +52,10 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.red[300],
                   ),
                   onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
                     BlocProvider.of<AuthBloc>(context)
                         .add(AuthSignOutRequested());
                   },

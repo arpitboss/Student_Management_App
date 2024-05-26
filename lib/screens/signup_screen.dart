@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_management_app/screens/email_verification_screen.dart';
 
 import '../bloc/auth/auth_bloc.dart';
+import 'home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -37,10 +38,18 @@ class SignUpScreen extends StatelessWidget {
                     .showSnackBar(SnackBar(content: Text(state.message)));
               }
               if (state is AuthEmailVerification) {
-                Navigator.push(
-                    (context),
-                    MaterialPageRoute(
-                        builder: (context) => const EmailVerificationScreen()));
+                if (state is AuthAuthenticated) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  );
+                } else {
+                  Navigator.pushReplacement(
+                      (context),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const EmailVerificationScreen()));
+                }
               }
             },
             child: Form(
